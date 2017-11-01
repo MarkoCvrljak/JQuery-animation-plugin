@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="hr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    
+    <title>JQuery plugin project</title>
+
+    
+</head>
+
+
+<body>
+ 
+
+
+    
+<div class="container">
+    <h2></h2>
+    <p></p>
+    <img class="img1" src="https://upload.wikimedia.org/wikipedia/commons/2/21/EverestfromKalarPatarcrop.JPG"> 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <ul>
+                    <li></li>
+                </ul>       
+            </div>
+            <div class="col-sm-6">
+                <p class="sidebar"></p>
+            </div>
+        </div>
+    </div>
+    <img class="img2" src="https://res.cloudinary.com/simpleview/image/upload/c_fill,f_auto,h_467,q_65,w_1024/v1/clients/norway/hiking_fossjuvet_forsand_norway_6fcf1221-3beb-4285-ae3d-322253a6a436.jpg">
+            
+</div>    
+ 
+
+
+
+<script
+src="https://code.jquery.com/jquery-3.2.1.min.js"
+integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+<script>
+    var winHeight = $(window).height();
+    var windowScrollPosTop = $(window).scrollTop();
+    var winScrollPosBottom = winHeight + windowScrollPosTop;
+    
+    $.fn.revealOnScroll = function(direction, speed){
+        
+        
+        return this.each(function(){
+        
+        var objectOffset = $(this).offset();
+        var objectOffsetTop = objectOffset.top;
+        
+            if(!$(this).hasClass("opac")){
+                    
+                if(direction == "right"){
+                    $(this).css({
+                            "opacity":0,
+                            "right":"700px",
+                            "position":"relative"
+                    });
+                }else{
+                    $(this).css({
+                            "opacity":0,
+                            "right":"-700px",
+                            "position":"relative"
+                    }); 
+                    }
+                
+                $(this).css("opacity", 0).addClass("opac")
+            }
+                
+            if(!$(this).hasClass("animation-complete")){
+                if(winScrollPosBottom > objectOffsetTop){
+                        $(this).animate({
+                            "opacity":1,
+                            "right":"0px"
+                        }, speed).addClass("animation-complete")
+                }
+            }
+        });
+    }
+        
+        
+        $(window).scroll(function(){
+        winHeight = $(window).height();
+        windowScrollPosTop = $(window).scrollTop();
+        winScrollPosBottom = winHeight + windowScrollPosTop;
+         
+        $(".img1").revealOnScroll("left", 1500);
+        $(".sidebar").revealOnScroll("left", 2000);
+        $("ul li").revealOnScroll("right", 500);
+    });
+    
+    
+
+</script>
+
+</body>
+</html>
+
